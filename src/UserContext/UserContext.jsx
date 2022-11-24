@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 
 // get firebase configuration
 const auth = getAuth(app);
+
 //create context provider
 export const ContextProvider = createContext();
 

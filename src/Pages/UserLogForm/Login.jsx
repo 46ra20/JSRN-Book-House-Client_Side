@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { ContextProvider } from '../../UserContext/UserContext';
 
 const Login = () => {
-    const {loginWithEmailAndPassword}  = useContext(ContextProvider);
+    const {loginWithEmailAndPassword,loginWithGoogle}  = useContext(ContextProvider);
     const [error, setError] = useState('');
     const handleLogin = (event) =>{
         event.preventDefault();
@@ -19,6 +19,13 @@ const Login = () => {
         })
         .catch(err=> setError(err.code))
     }
+
+    const handleGoogleLogIn = () =>{
+        loginWithGoogle()
+        .then(result => console.log(result.user))
+        .then(err => setError(err.code))
+    }
+
     return (
         <div>
             <div className='w-96 border rounded shadow p-8 mx-auto my-24'>
@@ -37,6 +44,8 @@ const Login = () => {
                     <p className='mb-3'>No account? Please <Link to={'/registration'}  className='underline text-blue-600 mb-3'>Create</Link> One..</p>
                     <input type="submit" className='w-full btn btn-outline btn-success' value={'Login'} />
                 </form>
+                <p className='divider'>Or</p>
+                <button className='btn btn-outline w-full btn-success' onClick={handleGoogleLogIn}>Continue With Google</button>
 
             </div>
         </div>
