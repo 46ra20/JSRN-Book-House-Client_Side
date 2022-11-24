@@ -1,13 +1,16 @@
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../../UserContext/UserContext';
 
 const Registration = () => {
     const { singUpUser } = useContext(ContextProvider);
     const [error, setError] = useState('');
     const [userType, setUserType] = useState('Buying')
+    
+    //navigate user after successfully create user
+    const navigate = useNavigate();
 
     const handleSingUp = (event) => {
         event.preventDefault();
@@ -20,9 +23,10 @@ const Registration = () => {
         
         singUpUser(userEmail, userPassword)
         .then(() => {
-            const userData = {"userName": userName, "userEmail": userEmail, "userRole": userType};
-            saveUserInDB(userData);
-            form.reset();
+                const userData = {"userName": userName, "userEmail": userEmail, "userRole": userType};
+                saveUserInDB(userData);
+                form.reset();
+                navigate('/')
             })
             .catch(err => setError(err.code))
 

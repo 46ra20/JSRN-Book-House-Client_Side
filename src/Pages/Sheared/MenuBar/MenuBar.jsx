@@ -1,10 +1,23 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
+import { useState } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ContextProvider } from '../../../UserContext/UserContext'
 
 const MenuBar = () => {
     const { user, logOut } = useContext(ContextProvider)
+    const [userData, setUserData] = useState(null)
+
+    //get user role
+    useEffect(() => {
+        fetch(`http://localhost:5001/user?email=${user?.email}`)
+            .then(res => res.json())
+            .then(data => setUserData(data))
+    }, [user])
+    console.log(user?.email);
+
+    console.log(userData)
+
     //sing out 
     const handleLogOut = () => {
         logOut()
@@ -18,7 +31,21 @@ const MenuBar = () => {
         <li><Link to={"/blog"}>Blog</Link></li>
         {
             user?.uid ?
-                <li><Link onClick={handleLogOut}>Log Out</Link></li>
+                <>
+                    {
+                        userData[0]?.userRole === "Selling" && <>
+                            <li><Link to={'/add-a-product'}>Add A product</Link></li>
+                            <li><Link to={'/my-product'}>My Products</Link></li>
+                        </>
+                    }
+                    {
+                        userData[0]?.admin === true && <>
+                            <li><Link>All Sellers</Link></li>
+                            <li><Link>All Buyers</Link></li>
+                        </> 
+                    }
+                    <li><Link onClick={handleLogOut}>Log Out</Link></li>
+                </>
                 :
                 <li><Link to={'/login'}>Log In</Link></li>
         }
