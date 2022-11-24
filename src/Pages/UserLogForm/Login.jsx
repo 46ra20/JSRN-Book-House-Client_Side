@@ -33,10 +33,10 @@ const Login = () => {
                     <h2 className='divide text-2xl text-center font-semibold'>Login</h2>
                 </div>
                 <form onSubmit={handleLogin}>
-                    <label htmlFor='userEmail'>Email:</label>
+                    <label className='font-semibold w-full' htmlFor='userEmail'>Email:</label>
                     <input id='userEmail' name='userEmail' className='input input-sm w-full input-bordered input-success mb-5' type={'email'} required></input>
 
-                    <label htmlFor="userPassword" className='mt-8 text text-semibold'>Password:</label>
+                    <label  htmlFor="userPassword" className='mt-8 font-semibold'>Password:</label>
                     <input id='userPassword' name='userPassword' className='input w-full input-bordered input-success mb-8 input-sm' type={'password'} required></input>
                     {
                         error && <p className='text-red-600'>{error}</p>

@@ -33,7 +33,6 @@ const Registration = () => {
     }
 
     const saveUserInDB = (user) =>{
-        console.log(user);
         fetch('http://localhost:5001/saveUser',{
             method:'POST',
             headers:{
@@ -50,17 +49,17 @@ const Registration = () => {
         <div>
             <div className='w-96 border rounded shadow p-8 mx-auto my-24'>
                 <form onSubmit={handleSingUp}>
-                    <label htmlFor="userName" className='block pb-1'>Your Name:</label>
+                    <label htmlFor="userName" className='block pb-1 font-semibold'>Your Name:</label>
                     <input type="text" name='userName' id='userName' className='input w-full input-sm input-bordered input-success mb-3' placeholder='Ex: Md Rakib Bhuiyan' />
-                    <label htmlFor='userEmail' className='block pb-1'>Email:</label>
+                    <label htmlFor='userEmail' className='block pb-1 font-semibold'>Email:</label>
                     <input id='userEmail' name='userEmail' className='input input-sm w-full input-bordered input-success mb-3' type={'email'} placeholder='ex@ex.com' required></input>
 
-                    <label htmlFor="userPassword" className='block pb-1 text text-semibold'>Password:</label>
+                    <label htmlFor="userPassword" className='block pb-1 text font-semibold'>Password:</label>
                     <input id='userPassword' name='userPassword' className='input w-full input-bordered input-success mb-3 input-sm' type={'password'} placeholder='######' required></input>
 
-                    <div className='flex justify-between mb-5'>
-                        <label htmlFor="userType">What do you want?</label>
-                        <select name="userType" id="userType" onChange={(e) => setUserType(e.target.value)} className='select select-sm select-bordered'>
+                    <div className='mb-5'>
+                        <label htmlFor="userType" className='font-semibold w-full'>What do you want?</label>
+                        <select name="userType" id="userType" onChange={(e) => setUserType(e.target.value)} className='select select-sm select-bordered w-full'>
                             <option>Buying</option>
                             <option>Selling</option>
                         </select>
