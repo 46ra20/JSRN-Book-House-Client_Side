@@ -1,11 +1,15 @@
 import React from 'react';
 import {Outlet} from 'react-router-dom'
+import MenuBar from '../../Sheared/MenuBar/MenuBar';
+import PageFooter from '../../Sheared/PageFooter/PageFooter';
 
 const MainLayOut = () => {
     return (
-        <div>
+        <>
+            <MenuBar></MenuBar>
             <Outlet></Outlet>
-        </div>
+            <PageFooter></PageFooter>
+        </>
     );
 };
 
