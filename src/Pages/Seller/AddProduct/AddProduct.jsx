@@ -43,7 +43,7 @@ const AddProduct = () => {
             .then(data => {
                 const imgUrl = data?.data?.display_url;
 
-                const addedProduct = { "userEmail": user.email,"userName": userData[0]?.userName, "entryDate":date.toLocaleDateString(), "categoryId": categoryId, "productName": productName, "imgUrl": imgUrl, "price": price, "condition": condition, "mobileNumber": mobileNumber, "location": location, "description": description, "yearOfPurchase": yearOfPurchase };
+                const addedProduct = { "userEmail": user.email,"userName": userData[0]?.userName,"isAlliable":"true","isUserVerify": userData[0]?.isUserVerify , "entryDate":date.toLocaleDateString(), "categoryId": categoryId, "productName": productName, "imgUrl": imgUrl, "price": price, "condition": condition, "mobileNumber": mobileNumber, "location": location, "description": description, "yearOfPurchase": yearOfPurchase };
 
                 saveProduct(addedProduct);
                 form.reset();
