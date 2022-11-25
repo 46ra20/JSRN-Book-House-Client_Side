@@ -41,8 +41,8 @@ const MenuBar = () => {
                     }
                     {
                         userData[0]?.role === 'admin' && <>
-                            <li><Link>All Sellers</Link></li>
-                            <li><Link>All Buyers</Link></li>
+                            <li><Link to={'/all-sellers'}>All Sellers</Link></li>
+                            <li><Link to={'/all-buyers'}>All Buyers</Link></li>
                         </> 
                     }
                     {

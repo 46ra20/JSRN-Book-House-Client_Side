@@ -1,15 +1,10 @@
 import React from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Categories = () => {
     const [catagories, setCategories] = useState([])
-    const navigate = useNavigate();
-
-    const handleCategory = (id) =>{
-        navigate(`category/${id}`)
-    }
 
     useEffect(() => {
         fetch('http://localhost:5000/productCategories')
@@ -24,10 +19,9 @@ const Categories = () => {
                     catagories?.map(category => <li 
                         key={category._id}
                         className='border rounded shadow-xl btn btn-outline btn-success px-4 py-2 '
-                        onClick={()=>handleCategory(category._id)}
                         style={{cursor:'pointer'}}
                         
-                    >{category.categoryName}</li>)
+                    ><Link to={`category/${category.categoryName}`}>{category.categoryName}</Link></li>)
                 }
             </ul>
         </div>
