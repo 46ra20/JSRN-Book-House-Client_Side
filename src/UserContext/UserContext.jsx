@@ -15,9 +15,9 @@ const UserContext = ({children}) => {
     //state declared
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null)
-    const [isSeller, setIsSeller] = useState(false)
-    const [isAdmin, setIsAdmin] = useState(false)
-    const [isBuyer, setIsBuyer] = useState(false)
+
+    //get user data from mongodb
+    const [userData, setUserData] = useState([])
 
     const gProvider = new GoogleAuthProvider();
 
@@ -55,12 +55,8 @@ const UserContext = ({children}) => {
             loginWithEmailAndPassword,
             loading,
             logOut,
-            isAdmin,
-            isSeller,
-            setIsAdmin,
-            setIsSeller,
-            isBuyer,
-            setIsBuyer
+            userData,
+            setUserData
         }}>
             {
                 children

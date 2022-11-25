@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
-import { ContextProvider } from '../../UserContext/UserContext';
+import { ContextProvider } from '../../../UserContext/UserContext';
 
 
 const AddProduct = () => {

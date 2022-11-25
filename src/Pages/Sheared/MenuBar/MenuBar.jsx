@@ -1,36 +1,25 @@
-import React, { Fragment, useEffect} from 'react';
-import { useState } from 'react';
+import React, { Fragment} from 'react';
+import { useEffect } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ContextProvider } from '../../../UserContext/UserContext'
 
 const MenuBar = () => {
-    const { user, logOut, setIsSeller, setIsAdmin,setIsBuyer, isBuyer, isSeller, isAdmin} = useContext(ContextProvider)
-    const [userData, setUserData] = useState([])
+    const { user, logOut, userData, setUserData} = useContext(ContextProvider)
 
+    //fetch user data
     useEffect(()=>{
         fetch(`http://localhost:5000/user?email=${user?.email}`)
         .then(res=> res.json())
         .then(data => setUserData(data))
-    },[user])
 
-    if(userData[0]?.adminRole){
-        setIsAdmin(true)
-    }
-    else if(userData[0]?.userRole ==='Selling'){
-        setIsSeller(true)
-    }
-    else if(userData[0]?.userRole=== 'Buying'){
-        setIsBuyer(true);
-    }
+    },[user?.email, setUserData])
+    
 
     //sing out 
     const handleLogOut = () => {
         logOut()
             .then(result => {
-                isSeller(false)
-                isAdmin(false)
-                isBuyer(false)
                 console.log(result)
             
             })
@@ -45,19 +34,19 @@ const MenuBar = () => {
             user?.uid ?
                 <>
                     {
-                        isSeller && <>
+                        userData[0]?.role === 'Selling' && <>
                             <li><Link to={'/add-a-product'}>Add A product</Link></li>
                             <li><Link to={'/my-product'}>My Products</Link></li>
                         </>
                     }
                     {
-                        isAdmin && <>
+                        userData[0]?.role === 'admin' && <>
                             <li><Link>All Sellers</Link></li>
                             <li><Link>All Buyers</Link></li>
                         </> 
                     }
                     {
-                        userData[0]?.userRole === "Buying" && <li><Link>My Orders</Link></li>
+                        userData[0]?.role === 'Buying' && <li><Link>My Orders</Link></li>
                     }
                     <li><Link onClick={handleLogOut}>Log Out</Link></li>
                 </>

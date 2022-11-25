@@ -3,12 +3,11 @@ import { useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../UserContext/UserContext';
 
 const SellersPrivateRouter = ({children}) => {
-    const {user, isSeller} = useContext(ContextProvider)
+    const {user, userData} = useContext(ContextProvider)
     const navigate = useNavigate()
     
-    console.log(isSeller);
 
-    if(user && isSeller){
+    if(user && userData){
         return children;
     }
     return navigate('/');
