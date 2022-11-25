@@ -33,7 +33,7 @@ const Registration = () => {
     }
 
     const saveUserInDB = (user) =>{
-        fetch('http://localhost:5001/saveUser',{
+        fetch('http://localhost:5000/saveUser',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

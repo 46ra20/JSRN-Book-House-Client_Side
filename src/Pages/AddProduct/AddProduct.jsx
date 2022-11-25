@@ -45,7 +45,7 @@ const AddProduct = () => {
 
 
     useEffect(() => {
-        fetch('http://localhost:5001/productCategories')
+        fetch('http://localhost:5000/productCategories')
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
@@ -58,7 +58,7 @@ const AddProduct = () => {
     //send data for save
 
     const saveProduct = (productDetails) =>{
-        fetch('http://localhost:5001/addProduct',{
+        fetch('http://localhost:5000/addProduct',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

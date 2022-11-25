@@ -5,6 +5,7 @@ import Home from '../Pages/Home/Home/Home';
 import MainLayOut from '../Pages/LayOut/MainLayOut/MainLayOut';
 import Login from '../Pages/UserLogForm/Login';
 import Registration from '../Pages/UserLogForm/Registration';
+import SellersPrivateRouter from './SellersPrivateRouter';
 
 // export router 
 export const router = createBrowserRouter([
@@ -30,7 +31,7 @@ export const router = createBrowserRouter([
             },
             {
                 path:"/add-a-product",
-                element:<AddProduct></AddProduct>
+                element:<SellersPrivateRouter><AddProduct></AddProduct></SellersPrivateRouter>
             }
         ]
     }

@@ -15,6 +15,8 @@ const UserContext = ({children}) => {
     //state declared
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null)
+    const [isSeller, setIsSeller] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
 
     const gProvider = new GoogleAuthProvider();
 

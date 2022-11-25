@@ -8,9 +8,12 @@ const MenuBar = () => {
     const { user, logOut } = useContext(ContextProvider)
     const [userData, setUserData] = useState(null)
 
-    //get user role
+    //test query isWork
+
+
+    // get user role
     useEffect(() => {
-        fetch(`http://localhost:5001/user?email=${user?.email}`)
+        fetch(`http://localhost:5000/user?email=${user?.email}`)
             .then(res => res.json())
             .then(data => setUserData(data))
     }, [user])

@@ -12,7 +12,7 @@ const Categories = () => {
     }
 
     useEffect(() => {
-        fetch('http://localhost:5001/productCategories')
+        fetch('http://localhost:5000/productCategories')
             .then(res => res.json())
             .then(data => setCategories(data))
     }, [])
