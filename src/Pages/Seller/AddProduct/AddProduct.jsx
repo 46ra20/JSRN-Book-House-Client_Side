@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../../../UserContext/UserContext';
 
 
@@ -10,6 +11,9 @@ const AddProduct = () => {
     const { user } = useContext(ContextProvider)
     const [catagories, setCategories] = useState([])
     const [categoryId, setCategoryId] = useState('')
+
+    //redirect seller into all product page
+    const navigate = useNavigate();
     //collect data from user form
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -69,6 +73,7 @@ const AddProduct = () => {
         .then(data=> {
             if(data.acknowledged){
                 toast.success('Your Product Added Successfully.')
+                navigate('/my-product')
             }
         })
     }
