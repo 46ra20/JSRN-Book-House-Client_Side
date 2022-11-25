@@ -17,6 +17,7 @@ const UserContext = ({children}) => {
     const [user, setUser] = useState(null)
     const [isSeller, setIsSeller] = useState(false)
     const [isAdmin, setIsAdmin] = useState(false)
+    const [isBuyer, setIsBuyer] = useState(false)
 
     const gProvider = new GoogleAuthProvider();
 
@@ -53,7 +54,13 @@ const UserContext = ({children}) => {
             loginWithGoogle,
             loginWithEmailAndPassword,
             loading,
-            logOut
+            logOut,
+            isAdmin,
+            isSeller,
+            setIsAdmin,
+            setIsSeller,
+            isBuyer,
+            setIsBuyer
         }}>
             {
                 children
