@@ -8,12 +8,16 @@ import { ContextProvider } from '../../../UserContext/UserContext';
 
 const AddProduct = () => {
 
-    const { user } = useContext(ContextProvider)
+    const { user, userData } = useContext(ContextProvider)
     const [catagories, setCategories] = useState([])
     const [categoryId, setCategoryId] = useState('')
 
+    //date
+    const date = new Date();
+
     //redirect seller into all product page
     const navigate = useNavigate();
+
     //collect data from user form
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -39,7 +43,7 @@ const AddProduct = () => {
             .then(data => {
                 const imgUrl = data?.data?.display_url;
 
-                const addedProduct = { "userEmail": user.email, "categoryId": categoryId, "productName": productName, "imgUrl": imgUrl, "price": price, "condition": condition, "mobileNumber": mobileNumber, "location": location, "description": description, "yearOfPurchase": yearOfPurchase };
+                const addedProduct = { "userEmail": user.email,"userName": userData[0]?.userName, "entryDate":date.toLocaleDateString(), "categoryId": categoryId, "productName": productName, "imgUrl": imgUrl, "price": price, "condition": condition, "mobileNumber": mobileNumber, "location": location, "description": description, "yearOfPurchase": yearOfPurchase };
 
                 saveProduct(addedProduct);
                 form.reset();
@@ -72,7 +76,9 @@ const AddProduct = () => {
         .then(res=>res.json())
         .then(data=> {
             if(data.acknowledged){
-                toast.success('Your Product Added Successfully.')
+                toast.success('Your Product Added Successfully.',{
+                    duration: '200'
+                })
                 navigate('/my-product')
             }
         })
