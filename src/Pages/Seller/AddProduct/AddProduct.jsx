@@ -25,6 +25,7 @@ const AddProduct = () => {
         const productName = form.productName.value;
         const productThumbnail = form.productThumbnail.files[0];
         const price = form.price.value;
+        const originalPrice = form.originalPrice.value;
         const condition = form.condition.value;
         const mobileNumber = form.mobileNumber.value;
         const location = form.location.value;
@@ -43,7 +44,7 @@ const AddProduct = () => {
             .then(data => {
                 const imgUrl = data?.data?.display_url;
 
-                const addedProduct = { "userEmail": user.email,"userName": userData[0]?.userName,"isAlliable":"true","isUserVerify": userData[0]?.isUserVerify , "entryDate":date.toLocaleDateString(), "categoryId": categoryId, "productName": productName, "imgUrl": imgUrl, "price": price, "condition": condition, "mobileNumber": mobileNumber, "location": location, "description": description, "yearOfPurchase": yearOfPurchase };
+                const addedProduct = { "userEmail": user.email,"userName": userData[0]?.userName,"isAlliable":"true","isUserVerify": userData[0]?.isUserVerify , "entryDate":date.toLocaleDateString(), "categoryId": categoryId, "productName": productName, "imgUrl": imgUrl, "price": price, "originalPrice": originalPrice, "condition": condition, "mobileNumber": mobileNumber, "location": location, "description": description, "yearOfPurchase": yearOfPurchase };
 
                 saveProduct(addedProduct);
                 form.reset();
@@ -97,8 +98,12 @@ const AddProduct = () => {
                     <input type="file" className="file-input file-input-bordered file-input-success w-full  file-input-sm" name='productThumbnail' required />
                 </div>
                 <div className='mt-3'>
-                    <label className='font-semibold w-full'>Price</label>
+                    <label className='font-semibold w-full'>Current Price</label>
                     <input className='input input-sm input-bordered input-success w-full' name='price' placeholder='23' required></input>
+                </div>
+                <div className='mt-3'>
+                    <label className='font-semibold w-full'>Original Price</label>
+                    <input className='input input-sm input-bordered input-success w-full' name='originalPrice' placeholder='23' required></input>
                 </div>
                 <div className='mt-3'>
                     <label htmlFor="category" className='font-semibold w-full'>Please Select a category: </label>

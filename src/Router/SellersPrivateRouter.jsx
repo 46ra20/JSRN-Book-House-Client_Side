@@ -7,7 +7,7 @@ const SellersPrivateRouter = ({children}) => {
     const navigate = useNavigate()
     
 
-    if(user && userData){
+    if(user && userData[0]?.role === "Selling"){
         return children;
     }
     return navigate('/');

@@ -47,21 +47,21 @@ export const router = createBrowserRouter([
             //sellers routers
             {
                 path:"/add-a-product",
-                element:<SellersPrivateRouter><AddProduct></AddProduct></SellersPrivateRouter>
+                element:<PrivateRouter><SellersPrivateRouter><AddProduct></AddProduct></SellersPrivateRouter></PrivateRouter>
             },
             {
                 path:"/my-product",
-                element:<SellersPrivateRouter><AllProduct></AllProduct></SellersPrivateRouter>
+                element:<PrivateRouter><SellersPrivateRouter><AllProduct></AllProduct></SellersPrivateRouter></PrivateRouter>
             },
 
             //admin routers
             {
                 path:"/all-buyers",
-                element:<AdminRouter><AllBuyers></AllBuyers></AdminRouter>
+                element:<PrivateRouter><AdminRouter><AllBuyers></AllBuyers></AdminRouter></PrivateRouter>
             },
             {
                 path:"/all-sellers",
-                element:<AdminRouter><AllSellers></AllSellers></AdminRouter>
+                element:<PrivateRouter><AdminRouter><AllSellers></AllSellers></AdminRouter></PrivateRouter>
             }
         ]
     }

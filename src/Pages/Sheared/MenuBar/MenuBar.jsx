@@ -46,7 +46,7 @@ const MenuBar = () => {
                         </> 
                     }
                     {
-                        userData[0]?.role === 'Buying' && <li><Link>My Orders</Link></li>
+                        user?.uid && <li><Link>My Orders</Link></li>
                     }
                     <li><Link onClick={handleLogOut}>Log Out</Link></li>
                 </>

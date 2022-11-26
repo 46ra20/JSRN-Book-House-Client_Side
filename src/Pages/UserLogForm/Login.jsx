@@ -18,9 +18,12 @@ const Login = () => {
         const form = event.target;
         const userEmail = form.userEmail.value;
         const userPassword = form.userPassword.value;
+        
+        // login with email and password
         loginWithEmailAndPassword(userEmail, userPassword)
         .then(result => {
             console.log(result)
+            navigate(from,{replace:true})
         })
         .catch(err=> setError(err.code))
     }
