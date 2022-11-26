@@ -1,9 +1,12 @@
 import React from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 const LoadDataByCategory = () => {
     const getProducts = useLoaderData();
     const currentYear = new Date().getFullYear();
+    if(getProducts.length < 1){
+        return <h2 className='text-3xl font-semibold text-center my-8'>No Data Found in this category</h2>
+    }
     return (
         <div className='container mx-auto my-8'>
             <div className='grid gap-6 grid-cols-1 lg:grid-cols-2'>
@@ -25,7 +28,7 @@ const LoadDataByCategory = () => {
                                 </p>
                                 <p>Posted Date: {product.entryDate}</p>
                                 <div className="card-actions justify-end">
-                                    <button className="btn btn-primary">Watch</button>
+                                    <button className="btn btn-success shadow-xl btn-outline">Book Now</button>
                                 </div>
                             </div>
                         </div>

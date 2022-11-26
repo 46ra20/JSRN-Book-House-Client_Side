@@ -11,6 +11,7 @@ import AdminRouter from './AdminRouter';
 import AllBuyers from '../Pages/Admin/AllBuyers/AllBuyers';
 import AllSellers from '../Pages/Admin/AllSellers/AllSellers';
 import LoadDataByCategory from '../Pages/LoadDataByCategory/LoadDataByCategory/LoadDataByCategory';
+import PrivateRouter from './PrivateRouter';
 
 // export router 
 export const router = createBrowserRouter([
@@ -28,9 +29,9 @@ export const router = createBrowserRouter([
             },
             //load product by category
             {
-                path:'/home/category/:categoryName',
+                path:'/category/:categoryName',
                 loader: async({params}) => fetch(`http://localhost:5000/get-product/${params.categoryName}`),
-                element:<LoadDataByCategory></LoadDataByCategory>
+                element:<PrivateRouter><LoadDataByCategory></LoadDataByCategory></PrivateRouter>
             },
 
             //user log from

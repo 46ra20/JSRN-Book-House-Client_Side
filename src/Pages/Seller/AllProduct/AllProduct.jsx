@@ -53,9 +53,9 @@ const AllProduct = () => {
                                 <td className='text-xl'>
                                     {
                                         product.isAlliable === "true" ?
-                                            <button className='btn btn-success' data-tip="You can add your product to advertise for quick sell">Available</button>
+                                            <button className='btn btn-success block mx-auto' data-tip="You can add your product to advertise for quick sell">Available</button>
                                             :
-                                            <button className='btn btn-disabled w-1/2'>Sold</button>
+                                            <button className='btn btn-disabled block w-4/5 mx-auto'>Sold</button>
                                     }
                                 </td>
                                 <td>

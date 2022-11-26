@@ -1,12 +1,17 @@
 import React from 'react';
 import { useState } from 'react';
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../../UserContext/UserContext';
 
 const Login = () => {
     const {loginWithEmailAndPassword,loginWithGoogle}  = useContext(ContextProvider);
     const [error, setError] = useState('');
+    //navigate user after login
+    const location = useLocation();
+    const navigate = useNavigate();
+    const from = location?.state?.from || '/';
+
     const handleLogin = (event) =>{
         event.preventDefault();
         setError('')
