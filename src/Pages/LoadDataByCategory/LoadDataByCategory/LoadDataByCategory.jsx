@@ -10,6 +10,10 @@ const LoadDataByCategory = () => {
     //state for modal
     const [modalInformation, setModalInformation] = useState({})
     const [openModal, setOpenModal] = useState(true)
+
+    //toaster
+    const [toaster, setToaster] = useState('');
+
     //get current user data
     const { user } = useContext(ContextProvider)
 
@@ -21,7 +25,7 @@ const LoadDataByCategory = () => {
 
     //set modal information
     const handleModal = (information) => {
-        const relativeInfo = { "itemName": information.productName, "userEmail": user.email, "currentPrice": information.price }
+        const relativeInfo = { "itemName": information.productName,"productId":information._id, "userEmail": user.email, "currentPrice": information.price }
         setOpenModal(true)
         setModalInformation(relativeInfo);
     }
@@ -71,7 +75,7 @@ const LoadDataByCategory = () => {
             </div>
             {/* booking modal */}
             {
-                openModal && <BookingModal modalInformation={modalInformation} setOpenModal={setOpenModal}></BookingModal>
+                openModal && <BookingModal modalInformation={modalInformation} setOpenModal={setOpenModal} setToaster={setToaster}></BookingModal>
             }
             <ReactTooltip></ReactTooltip>
         </div>

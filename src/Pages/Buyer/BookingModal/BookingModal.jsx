@@ -1,9 +1,9 @@
 import React from 'react';
+import toast, { Toaster } from 'react-hot-toast';
 
 
-const BookingModal = ({ modalInformation, setOpenModal }) => {
+const BookingModal = ({ modalInformation, setOpenModal, setToaster }) => {
     
-
     const handleSubmit = (event) =>{
         event.preventDefault();
         const form = event.target;
@@ -11,8 +11,24 @@ const BookingModal = ({ modalInformation, setOpenModal }) => {
         const buyerPhone = form.buyerPhone.value;
         const meetingLocation = form.meetingLocation.value;
 
-        console.log(buyerEmail, buyerPhone, meetingLocation)
+        const data = [{"buyerEmail":buyerEmail, "buyerPhone":buyerPhone, "meetingLocation":meetingLocation,"isAlliable":"false","isPaid":"false"},{"productId": modalInformation.productId}];
+        updateProductStatus(data);
         setOpenModal(false)
+    }
+
+    const updateProductStatus = (relativeInfo) =>{
+        console.log(relativeInfo);
+        fetch('http://localhost:5000/update-product-status',{
+            method:'put',
+            headers:{
+                'content-type':'application/json'
+            },
+            body: JSON.stringify(relativeInfo)
+        })
+        .then(res=> res.json())
+        .then(data => {
+            setToaster(data)
+        })
     }
 
     return (
@@ -46,6 +62,7 @@ const BookingModal = ({ modalInformation, setOpenModal }) => {
                     </div>
                 </form>
             </div>
+            <Toaster></Toaster>
         </div>
     );
 };

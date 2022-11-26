@@ -12,6 +12,7 @@ import AllBuyers from '../Pages/Admin/AllBuyers/AllBuyers';
 import AllSellers from '../Pages/Admin/AllSellers/AllSellers';
 import LoadDataByCategory from '../Pages/LoadDataByCategory/LoadDataByCategory/LoadDataByCategory';
 import PrivateRouter from './PrivateRouter';
+import MyOrders from '../Pages/Buyer/MyOrders/MyOrders';
 
 // export router 
 export const router = createBrowserRouter([
@@ -42,6 +43,12 @@ export const router = createBrowserRouter([
             {
                 path:"/registration",
                 element:<Registration></Registration>
+            },
+
+            //Customer order
+            {
+                path:'/my-order',
+                element:<PrivateRouter><MyOrders></MyOrders></PrivateRouter>
             },
 
             //sellers routers
