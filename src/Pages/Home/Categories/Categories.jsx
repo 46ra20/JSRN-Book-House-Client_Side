@@ -14,7 +14,7 @@ const Categories = () => {
 
     return (
         <div className='container mx-auto my-3'>
-            <ul className='flex justify-between'>
+            <ul className='flex justify-around'>
                 {
                     catagories?.map(category => <li 
                         key={category._id}

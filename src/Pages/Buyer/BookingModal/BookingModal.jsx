@@ -1,5 +1,4 @@
 import React from 'react';
-import toast, { Toaster } from 'react-hot-toast';
 
 
 const BookingModal = ({ modalInformation, setOpenModal, setToaster }) => {
@@ -62,7 +61,6 @@ const BookingModal = ({ modalInformation, setOpenModal, setToaster }) => {
                     </div>
                 </form>
             </div>
-            <Toaster></Toaster>
         </div>
     );
 };

@@ -4,7 +4,7 @@ import logo from '../../../Assets/logo.png'
 
 const PageFooter = () => {
     return (
-        <div className='bg-blue-700'>
+        <div className='bg-primary'>
             <footer className="footer p-10 text-neutral-content container mx-auto">
                 <div>
                     <img src={logo} alt='Logo' className='h-12 w-12 rounded-full'></img>

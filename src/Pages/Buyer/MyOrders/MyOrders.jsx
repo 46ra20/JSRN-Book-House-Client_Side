@@ -1,18 +1,26 @@
+import {  useQuery } from '@tanstack/react-query';
 import React from 'react';
-import { useState } from 'react';
-import { useEffect } from 'react';
 import { useContext } from 'react';
+import Loading from '../../../Components/Loading/Loading';
 import { ContextProvider } from '../../../UserContext/UserContext';
 
 const MyOrders = () => {
     const { user } = useContext(ContextProvider);
-    const [orders, setOrders] = useState([])
 
-    useEffect(() => {
-        fetch(`http://localhost:5000/my-product?email=${user.email}`)
-            .then(res => res.json())
-            .then(data => setOrders(data))
-    }, [user])
+    const { isLoading, data: orders } = useQuery({
+        queryKey: ['repoData'],
+        queryFn: () =>
+            fetch(`http://localhost:5000/my-product?email=${user.email}`).then(res =>
+                res.json()
+            )
+    })
+    if(isLoading){
+        return <Loading></Loading>
+    }
+    
+    if(orders.length < 1){
+        return <h1 className='text-center my-10 text-3xl font-bold'>You Have No Order Please Buy Something...</h1>
+    }
 
     return (
         <div className='container mx-auto my-5'>

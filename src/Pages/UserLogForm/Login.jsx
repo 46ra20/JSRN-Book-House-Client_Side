@@ -30,7 +30,10 @@ const Login = () => {
 
     const handleGoogleLogIn = () =>{
         loginWithGoogle()
-        .then(result => console.log(result.user))
+        .then(result => {
+            navigate(from,{replace:true})
+            console.log(result.user)
+        })
         .then(err => setError(err.code))
     }
 

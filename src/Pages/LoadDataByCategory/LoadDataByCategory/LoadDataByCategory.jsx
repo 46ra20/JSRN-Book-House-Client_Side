@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import BookingModal from '../../Buyer/BookingModal/BookingModal';
 import { useContext } from 'react';
 import { ContextProvider } from '../../../UserContext/UserContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 const LoadDataByCategory = () => {
     //state for modal
@@ -29,6 +30,12 @@ const LoadDataByCategory = () => {
         setOpenModal(true)
         setModalInformation(relativeInfo);
     }
+
+    //show toaster
+    if(toaster.acknowledged){
+        toast.success('Congratulation You Booked this product !!!')
+    }
+
 
     return (
         <div className='container mx-auto my-8'>
@@ -78,6 +85,7 @@ const LoadDataByCategory = () => {
                 openModal && <BookingModal modalInformation={modalInformation} setOpenModal={setOpenModal} setToaster={setToaster}></BookingModal>
             }
             <ReactTooltip></ReactTooltip>
+            <Toaster></Toaster>
         </div>
     );
 };

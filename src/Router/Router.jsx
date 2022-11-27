@@ -13,6 +13,7 @@ import AllSellers from '../Pages/Admin/AllSellers/AllSellers';
 import LoadDataByCategory from '../Pages/LoadDataByCategory/LoadDataByCategory/LoadDataByCategory';
 import PrivateRouter from './PrivateRouter';
 import MyOrders from '../Pages/Buyer/MyOrders/MyOrders';
+import Dashboard from '../Pages/LayOut/Dashboard/Dashboard';
 
 // export router 
 export const router = createBrowserRouter([
@@ -43,32 +44,40 @@ export const router = createBrowserRouter([
             {
                 path:"/registration",
                 element:<Registration></Registration>
-            },
-
+            },           
+        ]
+    },
+    {
+        path:"/dashboard",
+        element:<Dashboard></Dashboard>,
+        children:[
             //Customer order
             {
-                path:'/my-order',
+                path:'/dashboard',
                 element:<PrivateRouter><MyOrders></MyOrders></PrivateRouter>
             },
-
-            //sellers routers
             {
-                path:"/add-a-product",
-                element:<PrivateRouter><SellersPrivateRouter><AddProduct></AddProduct></SellersPrivateRouter></PrivateRouter>
+                path:'/dashboard/my-order',
+                element:<PrivateRouter><MyOrders></MyOrders></PrivateRouter>
+            },
+             //sellers routers
+             {
+                path:"/dashboard/add-a-product",
+                element:<SellersPrivateRouter><AddProduct></AddProduct></SellersPrivateRouter>
             },
             {
-                path:"/my-product",
-                element:<PrivateRouter><SellersPrivateRouter><AllProduct></AllProduct></SellersPrivateRouter></PrivateRouter>
+                path:"/dashboard/my-product",
+                element:<SellersPrivateRouter><AllProduct></AllProduct></SellersPrivateRouter>
             },
 
             //admin routers
             {
-                path:"/all-buyers",
-                element:<PrivateRouter><AdminRouter><AllBuyers></AllBuyers></AdminRouter></PrivateRouter>
+                path:"/dashboard/all-buyers",
+                element:<AdminRouter><AllBuyers></AllBuyers></AdminRouter>
             },
             {
-                path:"/all-sellers",
-                element:<PrivateRouter><AdminRouter><AllSellers></AllSellers></AdminRouter></PrivateRouter>
+                path:"/dashboard/all-sellers",
+                element:<AdminRouter><AllSellers></AllSellers></AdminRouter>
             }
         ]
     }
