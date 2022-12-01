@@ -7,6 +7,8 @@ import { ContextProvider } from '../../../UserContext/UserContext';
 const MyOrders = () => {
     const { user } = useContext(ContextProvider);
 
+    
+    //use query to fetching data
     const { isLoading, data: orders } = useQuery({
         queryKey: ['repoData'],
         queryFn: () =>
