@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../../UserContext/UserContext';
 
 const Login = () => {
-    const {loginWithEmailAndPassword,loginWithGoogle}  = useContext(ContextProvider);
+    const {loginWithEmailAndPassword,loginWithGoogle,setUserData}  = useContext(ContextProvider);
     const [error, setError] = useState('');
     //navigate user after login
     const location = useLocation();
@@ -21,11 +21,25 @@ const Login = () => {
         
         // login with email and password
         loginWithEmailAndPassword(userEmail, userPassword)
-        .then(result => {
-            console.log(result)
-            navigate(from,{replace:true})
+        .then((result) => {
+            fetch(`https://b612-used-products-resale-server-side-46ra20-main.vercel.app/user?email=${result.user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                localStorage.setItem('userRole',data[0]?.role)
+                setUserData(data)
+                navigate(from,{replace:true})
+            })
         })
-        .catch(err=> setError(err.code))
+        .catch(err=> {
+            if(err.code==="auth/user-not-found"){
+                setError("Sorry No User Found with this email please create one")
+            }
+            if(err.code==="auth/wrong-password"){
+
+                setError("Your Password doesn't match with user")
+            }
+            })
     }
 
     const handleGoogleLogIn = () =>{
@@ -45,10 +59,10 @@ const Login = () => {
                 </div>
                 <form onSubmit={handleLogin}>
                     <label className='font-semibold w-full' htmlFor='userEmail'>Email:</label>
-                    <input id='userEmail' name='userEmail' className='input input-sm w-full input-bordered input-success mb-5' type={'email'} required></input>
+                    <input id='userEmail' name='userEmail' className={`input input-sm w-full input-bordered input-success mb-5  ${(error==="Sorry No User Found with this email please create one")?'bg-red-100':''}`} type={'email'} required></input>
 
                     <label  htmlFor="userPassword" className='mt-8 font-semibold'>Password:</label>
-                    <input id='userPassword' name='userPassword' className='input w-full input-bordered input-success mb-8 input-sm' type={'password'} required></input>
+                    <input id='userPassword' name='userPassword' className={`input w-full input-bordered input-success mb-8 input-sm ${(error==="Your Password doesn't match with user")?'bg-red-100':''}`} type={'password'} required></input>
                     {
                         error && <p className='text-red-600'>{error}</p>
                     }

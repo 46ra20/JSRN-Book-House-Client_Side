@@ -19,6 +19,7 @@
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "react-tooltip": "^4.5.1",
+    "swiper": "^8.4.5",
     "tailwind": "^4.0.0",
     "victory": "^36.6.8",
     "web-vitals": "^2.1.4"

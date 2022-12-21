@@ -23,7 +23,7 @@ const Registration = () => {
         
         singUpUser(userEmail, userPassword)
         .then(() => {
-                const userData = {"userName": userName, "userEmail": userEmail, "userRole": userType};
+                const userData = {"userName": userName, "userEmail": userEmail, "role": userType};
                 saveUserInDB(userData);
                 form.reset();
                 navigate('/')
@@ -33,7 +33,7 @@ const Registration = () => {
     }
 
     const saveUserInDB = (user) =>{
-        fetch('http://localhost:5000/saveUser',{
+        fetch('https://b612-used-products-resale-server-side-46ra20-main.vercel.app/saveUser',{
             method:'POST',
             headers:{
                 'content-type':'application/json'

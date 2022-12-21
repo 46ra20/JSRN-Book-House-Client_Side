@@ -1,19 +1,10 @@
 import React, { Fragment } from 'react';
-import { useEffect } from 'react';
 import { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { ContextProvider } from '../../../UserContext/UserContext'
 
 const MenuBar = () => {
-    const { user, logOut, setUserData } = useContext(ContextProvider)
-
-    //fetch user data
-    useEffect(() => {
-        fetch(`http://localhost:5000/user?email=${user?.email}`)
-            .then(res => res.json())
-            .then(data => setUserData(data))
-
-    }, [user?.email, setUserData])
+    const { user, logOut } = useContext(ContextProvider)
 
 
     //sing out 
@@ -21,7 +12,7 @@ const MenuBar = () => {
         logOut()
             .then(result => {
                 console.log(result)
-
+                localStorage.removeItem('userRole')
             })
             .catch(err => console.log(err))
     }

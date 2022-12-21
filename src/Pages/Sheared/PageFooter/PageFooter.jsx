@@ -2,7 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../../Assets/logo.png'
 
-const PageFooter = () => {
+const PageFooter = ({setPageLoading}) => {
+    setPageLoading(false)
     return (
         <div className='bg-primary'>
             <footer className="footer p-10 text-neutral-content container mx-auto">

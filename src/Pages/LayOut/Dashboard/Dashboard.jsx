@@ -8,6 +8,7 @@ import { ContextProvider } from '../../../UserContext/UserContext';
 const Dashboard = () => {
 
     const { user, userData } = useContext(ContextProvider)
+    const userType = localStorage.getItem('userRole')
     return (
         <div>
             <MenuBar></MenuBar>
@@ -23,13 +24,13 @@ const Dashboard = () => {
                             user?.uid && <li><Link to={'/dashboard/my-order'}>My Orders</Link></li>
                         }
                         {
-                            userData[0]?.role === 'Selling' && <>
+                            userType === 'Selling' && <>
                                 <li><Link to={'/dashboard/add-a-product'}>Add A product</Link></li>
                                 <li><Link to={'/dashboard/my-product'}>My Products</Link></li>
                             </>
                         }
                         {
-                            userData[0]?.role === 'admin' && <>
+                            userType === 'admin' && <>
                                 <li><Link to={'/dashboard/all-sellers'}>All Sellers</Link></li>
                                 <li><Link to={'/dashboard/all-buyers'}>All Buyers</Link></li>
                                 <li><Link to={''}>Reported Item</Link></li>

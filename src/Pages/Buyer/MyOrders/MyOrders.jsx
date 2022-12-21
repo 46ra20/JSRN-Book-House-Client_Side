@@ -12,7 +12,7 @@ const MyOrders = () => {
     const { isLoading, data: orders } = useQuery({
         queryKey: ['repoData'],
         queryFn: () =>
-            fetch(`http://localhost:5000/my-product?email=${user.email}`).then(res =>
+            fetch(`https://b612-used-products-resale-server-side-46ra20-main.vercel.app/my-product?email=${user.email}`).then(res =>
                 res.json()
             )
     })

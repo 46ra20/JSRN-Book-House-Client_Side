@@ -2,33 +2,52 @@ import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
 import Loading from '../../../Components/Loading/Loading';
+import { toast } from 'react-hot-toast';
 
 
 const AllBuyers = () => {
     const [getBuyers, setGetBuyers] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
 
     // get data axios
     async function getUser() {
+        
         try {
-            const response = await axios.get('http://localhost:5000/all-buyers');
+            const response = await axios.get('https://b612-used-products-resale-server-side-46ra20-main.vercel.app/all-buyers');
             setGetBuyers(response.data);
+            setIsLoading(false)
         } catch (error) {
             console.error(error);
+            setIsLoading(false);
         }
     }
 
     getUser().catch(err=> console.log(err))
 
-    if(getBuyers.length<1){
+    if(isLoading){
         return <Loading></Loading>
     }
 
-    const handleDelete = (id) =>{
-        
+    const handleDelete = (id) =>{  
+        fetch(`https://b612-used-products-resale-server-side-46ra20-main.vercel.app/delete-user/?id=${id}`,
+    {
+        method:"delete"
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        console.log(data)
+        if(data.deleteCount>0){
+            toast.success("User Delete Successfully.")
+        }
+    })        
     }
 
     return (
-        <div className='container mx-auto my-8'>
+        <>  
+        <div className={`${getBuyers.length<1?"":"hidden"}`}>
+            <p className='text-3xl text-center my-10'>No Buyer yet sign up....</p>
+        </div>
+            <div className={`container mx-auto my-8 ${getBuyers.length>0?'':'hidden'}`}>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
                     <thead>
@@ -57,6 +76,7 @@ const AllBuyers = () => {
                 </table>
             </div>
         </div>
+        </>
     );
 };
 

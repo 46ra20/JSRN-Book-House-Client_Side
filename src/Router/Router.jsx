@@ -32,7 +32,7 @@ export const router = createBrowserRouter([
             //load product by category
             {
                 path:'/category/:categoryName',
-                loader: async({params}) => fetch(`http://localhost:5000/get-product/${params.categoryName}`),
+                loader: async({params}) => fetch(`https://b612-used-products-resale-server-side-46ra20-main.vercel.app/get-product/${params.categoryName}`),
                 element:<PrivateRouter><LoadDataByCategory></LoadDataByCategory></PrivateRouter>
             },
 

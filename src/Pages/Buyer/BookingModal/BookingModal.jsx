@@ -17,7 +17,7 @@ const BookingModal = ({ modalInformation, setOpenModal, setToaster }) => {
 
     const updateProductStatus = (relativeInfo) =>{
         console.log(relativeInfo);
-        fetch('http://localhost:5000/update-product-status',{
+        fetch('https://b612-used-products-resale-server-side-46ra20-main.vercel.app/update-product-status',{
             method:'put',
             headers:{
                 'content-type':'application/json'
