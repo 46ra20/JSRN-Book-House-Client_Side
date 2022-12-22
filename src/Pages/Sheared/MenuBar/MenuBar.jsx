@@ -5,7 +5,7 @@ import { ContextProvider } from '../../../UserContext/UserContext'
 
 const MenuBar = () => {
     const { user, logOut } = useContext(ContextProvider)
-
+    console.log(user);
 
     //sing out 
     const handleLogOut = () => {
