@@ -3,7 +3,7 @@ import React from "react";
 const AdvertisedCard = ({card}) => {
     const {imgUrl,productName, description} = card;
   return (
-    <div className="card bg-gray-50 shadow-xl h-full">
+    <div className="card bg-gray-50 shadow-xl h-full mx-3 md:mx-auto">
       <figure className="px-10 pt-10">
         <img
           src={imgUrl}

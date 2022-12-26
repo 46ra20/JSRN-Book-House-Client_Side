@@ -7,7 +7,7 @@ import { ContextProvider } from '../../../UserContext/UserContext';
 
 const Dashboard = () => {
 
-    const { user, userData } = useContext(ContextProvider)
+    const { user } = useContext(ContextProvider)
     const userType = localStorage.getItem('userRole')
     return (
         <div>

@@ -10,16 +10,19 @@ import SellersPrivateRouter from './SellersPrivateRouter';
 import AdminRouter from './AdminRouter';
 import AllBuyers from '../Pages/Admin/AllBuyers/AllBuyers';
 import AllSellers from '../Pages/Admin/AllSellers/AllSellers';
-import LoadDataByCategory from '../Pages/LoadDataByCategory/LoadDataByCategory/LoadDataByCategory';
 import PrivateRouter from './PrivateRouter';
 import MyOrders from '../Pages/Buyer/MyOrders/MyOrders';
 import Dashboard from '../Pages/LayOut/Dashboard/Dashboard';
-
+import Blogs from '../Pages/Blogs/Blogs';
+import ReportedItems from '../Pages/Admin/ReportedItems/ReportedItems';
+import LoadDataByCategory from '../Pages/LoadDataByCategory/LoadDataByCategory/LoadDataByCategory/LoadDataByCategory';
+import ErrorPage from '../Pages/Sheared/ErrorPage/ErrorPage';
 // export router 
 export const router = createBrowserRouter([
     {
         path:"/",
         element:<MainLayOut></MainLayOut>,
+        errorElement:<ErrorPage></ErrorPage>,
         children:[
             {
                 path:"/",
@@ -29,10 +32,14 @@ export const router = createBrowserRouter([
                 path:"/home",
                 element:<Home></Home>
             },
+            {
+                path:'/blog',
+                element:<Blogs></Blogs>
+            },
             //load product by category
             {
                 path:'/category/:categoryName',
-                loader: async({params}) => fetch(`https://b612-used-products-resale-server-side-46ra20-main.vercel.app/get-product/${params.categoryName}`),
+                loader: async({params}) => fetch(` https://b612-used-products-resale-server-side-46ra20-main-46ra20.vercel.app/get-product/${params.categoryName}`),
                 element:<PrivateRouter><LoadDataByCategory></LoadDataByCategory></PrivateRouter>
             },
 
@@ -50,6 +57,7 @@ export const router = createBrowserRouter([
     {
         path:"/dashboard",
         element:<Dashboard></Dashboard>,
+        // errorElement:<ErrorPage></ErrorPage>,
         children:[
             //Customer order
             {
@@ -78,6 +86,10 @@ export const router = createBrowserRouter([
             {
                 path:"/dashboard/all-sellers",
                 element:<AdminRouter><AllSellers></AllSellers></AdminRouter>
+            },
+            {
+                path:"/dashboard/reported-items",
+                element:<AdminRouter><ReportedItems></ReportedItems></AdminRouter>
             }
         ]
     }

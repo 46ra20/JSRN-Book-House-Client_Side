@@ -14,7 +14,7 @@ const Advertised = () => {
     return (
         <div className={`${getData<1?"hidden":""} my-10`}>
             <h2 className='divider text-center text-3xl font-semibold'>Advertised By Seller</h2>
-            <div className='container grid mx-3 md:mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'>
+            <div className='container grid mx-3 md:mx-auto grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 my-8'>
                 {
                     getData?.map(card =><AdvertisedCard card={card} key={card._id}></AdvertisedCard>)
                 }

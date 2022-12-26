@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../../UserContext/UserContext';
+import { accessToken } from '../../Utility/Utility';
 
 const Registration = () => {
     const { singUpUser } = useContext(ContextProvider);
@@ -22,11 +23,12 @@ const Registration = () => {
 
         
         singUpUser(userEmail, userPassword)
-        .then(() => {
+        .then((result) => {
                 const userData = {"userName": userName, "userEmail": userEmail, "role": userType};
                 saveUserInDB(userData);
                 form.reset();
                 navigate('/')
+                accessToken(result.user)
             })
             .catch(err => setError(err.code))
 

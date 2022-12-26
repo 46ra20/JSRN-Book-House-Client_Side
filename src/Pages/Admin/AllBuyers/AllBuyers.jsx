@@ -1,53 +1,40 @@
 import React from 'react';
 import axios from 'axios';
 import { useState } from 'react';
-import Loading from '../../../Components/Loading/Loading';
-import { toast } from 'react-hot-toast';
+import { deleteUser } from '../DeleteUser/DeleteUser';
+import { Toaster } from 'react-hot-toast';
 
 
 const AllBuyers = () => {
     const [getBuyers, setGetBuyers] = useState([])
-    const [isLoading, setIsLoading] = useState(true)
 
     // get data axios
     async function getUser() {
-        
         try {
-            const response = await axios.get('https://b612-used-products-resale-server-side-46ra20-main.vercel.app/all-buyers');
+            const response = await axios.get(' https://b612-used-products-resale-server-side-46ra20-main-46ra20.vercel.app/all-buyers',{
+                headers:{
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            });
             setGetBuyers(response.data);
-            setIsLoading(false)
         } catch (error) {
             console.error(error);
-            setIsLoading(false);
         }
     }
 
     getUser().catch(err=> console.log(err))
 
-    if(isLoading){
-        return <Loading></Loading>
+    if(getBuyers.length<1){
+        return <h2 className='text-3xl font-semibold text-center my-10'>Ho NO !! No Buyer ...</h2>
+        
     }
 
-    const handleDelete = (id) =>{  
-        fetch(`https://b612-used-products-resale-server-side-46ra20-main.vercel.app/delete-user/?id=${id}`,
-    {
-        method:"delete"
-    })
-    .then(res=>res.json())
-    .then(data=>{
-        console.log(data)
-        if(data.deleteCount>0){
-            toast.success("User Delete Successfully.")
-        }
-    })        
+    const handleDelete = (id) =>{
+        deleteUser(id)
     }
 
     return (
-        <>  
-        <div className={`${getBuyers.length<1?"":"hidden"}`}>
-            <p className='text-3xl text-center my-10'>No Buyer yet sign up....</p>
-        </div>
-            <div className={`container mx-auto my-8 ${getBuyers.length>0?'':'hidden'}`}>
+        <div className='container mx-auto my-8'>
             <div className="overflow-x-auto">
                 <table className="table table-zebra w-full">
                     <thead>
@@ -75,8 +62,8 @@ const AllBuyers = () => {
                     </tbody>
                 </table>
             </div>
+            <Toaster></Toaster>
         </div>
-        </>
     );
 };
 

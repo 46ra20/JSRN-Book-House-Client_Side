@@ -10,8 +10,7 @@ const MenuBar = () => {
     //sing out 
     const handleLogOut = () => {
         logOut()
-            .then(result => {
-                console.log(result)
+            .then(() => {
                 localStorage.removeItem('userRole')
             })
             .catch(err => console.log(err))
@@ -34,7 +33,7 @@ const MenuBar = () => {
     return (
         <div className='bg-primary shadow-lg'>
             <div className="container navbar mx-auto justify-between text-white font-semibold">
-                <div className="navbar-start w-full justify-between">
+                <div className="navbar-start w-full">
 
                     <div className='flex md:hidden items-center'>
                         <label htmlFor="dashboardDrawer" className="drawer-button lg:hidden">
@@ -48,7 +47,7 @@ const MenuBar = () => {
                         </div>
                     </Link>
 
-                    <div className="dropdown">
+                    <div className="dropdown lg:hidden">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>

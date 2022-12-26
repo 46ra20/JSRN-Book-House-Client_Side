@@ -1,17 +1,19 @@
 import { useContext } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../UserContext/UserContext';
 
 const SellersPrivateRouter = ({children}) => {
     const {user} = useContext(ContextProvider)
-    const userRole = localStorage.getItem('userRole')
-    const location = useLocation()
+    const navigate = useNavigate()
+    const location = useLocation();
+    const from = location?.state?.from || '/';
+    const userType = localStorage.getItem('userRole');
     
 
-    if(user && userRole === "Selling"){
+    if(user && userType === "Selling"){
         return children;
     }
-    return <Navigate to={'/login'} state= {{from: location}} replace={true}></Navigate>;
+    return navigate(from,{replace: true});
 };
 
 export default SellersPrivateRouter;

@@ -1,7 +1,8 @@
 import React from 'react';
 
 
-const BookingModal = ({ modalInformation, setOpenModal, setToaster }) => {
+const BookingModal = ({ modalInformation, setOpenModal,updateProductStatus}) => {
+
     
     const handleSubmit = (event) =>{
         event.preventDefault();
@@ -10,25 +11,12 @@ const BookingModal = ({ modalInformation, setOpenModal, setToaster }) => {
         const buyerPhone = form.buyerPhone.value;
         const meetingLocation = form.meetingLocation.value;
 
-        const data = [{"buyerEmail":buyerEmail, "buyerPhone":buyerPhone, "meetingLocation":meetingLocation,"isAlliable":"false","isPaid":"false"},{"productId": modalInformation.productId}];
+        const data = [{"buyerEmail":buyerEmail, "buyerPhone":buyerPhone, "meetingLocation":meetingLocation,"isAlliable":"false","isPaid":"false","isShowAsAdvertise":"false"},{"productId": modalInformation.productId}];
         updateProductStatus(data);
         setOpenModal(false)
     }
 
-    const updateProductStatus = (relativeInfo) =>{
-        console.log(relativeInfo);
-        fetch('https://b612-used-products-resale-server-side-46ra20-main.vercel.app/update-product-status',{
-            method:'put',
-            headers:{
-                'content-type':'application/json'
-            },
-            body: JSON.stringify(relativeInfo)
-        })
-        .then(res=> res.json())
-        .then(data => {
-            setToaster(data)
-        })
-    }
+    
 
     return (
         <div>

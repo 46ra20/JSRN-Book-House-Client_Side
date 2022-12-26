@@ -1,4 +1,4 @@
-import {  useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { useContext } from 'react';
 import Loading from '../../../Components/Loading/Loading';
@@ -7,20 +7,24 @@ import { ContextProvider } from '../../../UserContext/UserContext';
 const MyOrders = () => {
     const { user } = useContext(ContextProvider);
 
-    
-    //use query to fetching data
-    const { isLoading, data: orders } = useQuery({
+    const { isLoading, data, isError } = useQuery({
         queryKey: ['repoData'],
         queryFn: () =>
-            fetch(`https://b612-used-products-resale-server-side-46ra20-main.vercel.app/my-product?email=${user.email}`).then(res =>
+            fetch(`https://b612-used-products-resale-server-side-46ra20-main-46ra20.vercel.app/my-product?email=${user.email}`,
+            {
+                headers: {
+                    authorization: `bearer ${localStorage.getItem('accessToken')}`
+                }
+            }).then(res =>
                 res.json()
             )
     })
-    if(isLoading){
+    console.log(data)
+    if (isLoading) {
         return <Loading></Loading>
     }
-    
-    if(orders.length < 1){
+
+    if (isError) {
         return <h1 className='text-center my-10 text-3xl font-bold'>You Have No Order Please Buy Something...</h1>
     }
 
@@ -38,7 +42,7 @@ const MyOrders = () => {
                     </thead>
                     <tbody>
                         {
-                            orders.map(order =>
+                            data?.map(order =>
                                 <tr key={order._id} className='text-xl'>
                                     <th>1</th>
                                     <td className='flex items-center'>
@@ -48,9 +52,9 @@ const MyOrders = () => {
                                     <td>{order.price}$</td>
                                     <td>
                                         {
-                                            order.isPaid === "true"?
-                                            <p>Paid</p>:
-                                            <button className='btn btn-success'>Pay</button>
+                                            order.isPaid === "true" ?
+                                                <p>Paid</p> :
+                                                <button className='btn btn-success'>Pay</button>
                                         }
                                     </td>
                                 </tr>

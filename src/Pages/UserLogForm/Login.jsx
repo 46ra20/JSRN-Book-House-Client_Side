@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useContext } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../../UserContext/UserContext';
+import { accessToken } from '../../Utility/Utility';
 
 const Login = () => {
     const {loginWithEmailAndPassword,loginWithGoogle,setUserData}  = useContext(ContextProvider);
@@ -22,14 +23,9 @@ const Login = () => {
         // login with email and password
         loginWithEmailAndPassword(userEmail, userPassword)
         .then((result) => {
-            fetch(`https://b612-used-products-resale-server-side-46ra20-main.vercel.app/user?email=${result.user?.email}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                localStorage.setItem('userRole',data[0]?.role)
-                setUserData(data)
-                navigate(from,{replace:true})
-            })
+            console.log(result)
+            saveUserType(result.user?.email)
+            accessToken(result.user);
         })
         .catch(err=> {
             if(err.code==="auth/user-not-found"){
@@ -42,11 +38,23 @@ const Login = () => {
             })
     }
 
+    const saveUserType = (email) => {
+        fetch(`https://b612-used-products-resale-server-side-46ra20-main.vercel.app/user?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                localStorage.setItem('userRole',data[0]?.role)
+                setUserData(data)
+                navigate(from,{replace:true})
+            })
+    }
+
     const handleGoogleLogIn = () =>{
         loginWithGoogle()
         .then(result => {
             navigate(from,{replace:true})
             console.log(result.user)
+            accessToken(result.user);
         })
         .then(err => setError(err.code))
     }

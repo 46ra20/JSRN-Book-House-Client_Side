@@ -1,16 +1,18 @@
 import { useContext } from 'react';
-import { Navigate, useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ContextProvider } from '../UserContext/UserContext';
 
 const AdminRouter = ({children}) => {
-    const {user} = useContext(ContextProvider)
-    const userRole = localStorage.getItem('userRole')
-    const location = useLocation()
+    const navigate = useNavigate()
+    const {user} = useContext(ContextProvider);
+    const userType = localStorage.getItem('userRole');
+    const location = useLocation();
+    const from = location?.state?.from || '/';
     
-    if(user && userRole === "admin"){
+    if(user && userType === "admin"){
         return children;
     }
-    return <Navigate to={'/login'} state= {{from: location}} replace={true}></Navigate>
+    return navigate(from, {replace:true});
 };
 
 export default AdminRouter;
